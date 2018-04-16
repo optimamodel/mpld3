@@ -336,8 +336,31 @@
         return new Date(ordinal_to_js_date(value));
       });
     }
-    var tickformat = mpld3_tickFormat(this.props.tickformat, this.props.tickvalues);
-    this.axis = d3.svg.axis().scale(this.scale).orient(this.props.position).ticks(this.props.nticks).tickValues(this.props.tickvalues).tickFormat(tickformat);
+    var sortedtickformats;
+    var sortedtickvalues;
+    if (this.props.tickformat !== "" && this.props.tickformat !== null) {
+      sortedtickformats = this.props.tickformat.slice();
+      sortedtickvalues = this.props.tickvalues.slice();
+      var ticksinfo = [];
+      for (var i = 0; i < this.props.tickformat.length; i++) {
+        ticksinfo.push({
+          values: this.props.tickvalues[i],
+          formats: this.props.tickformat[i]
+        });
+      }
+      ticksinfo.sort(function(a, b) {
+        return a.values - b.values;
+      });
+      for (var i = 0; i < this.props.tickformat.length; i++) {
+        sortedtickvalues[i] = ticksinfo[i].values;
+        sortedtickformats[i] = ticksinfo[i].formats;
+      }
+    } else {
+      sortedtickformats = this.props.tickformat;
+      sortedtickvalues = this.props.tickvalues;
+    }
+    var tickformat = mpld3_tickFormat(sortedtickformats, sortedtickvalues);
+    this.axis = d3.svg.axis().scale(this.scale).orient(this.props.position).ticks(this.props.nticks).tickValues(sortedtickvalues).tickFormat(tickformat);
     this.filter_ticks(this.axis.tickValues, this.axis.scale().domain());
     this.elem = this.ax.baseaxes.append("g").attr("transform", this.transform).attr("class", this.cssclass).call(this.axis);
     mpld3.insert_css("div#" + this.ax.fig.figid + " ." + this.cssclass + " line, " + " ." + this.cssclass + " path", {

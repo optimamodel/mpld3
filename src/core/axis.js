@@ -78,14 +78,50 @@ mpld3_Axis.prototype.draw = function() {
             return new Date(ordinal_to_js_date(value));
         });
     }
-
-    var tickformat = mpld3_tickFormat(this.props.tickformat, this.props.tickvalues);
-
+    
+    // Define tick format variables.
+    var sortedtickformats;
+    var sortedtickvalues;
+ 
+    // Sort tick information only if there is something to sort...
+    if (this.props.tickformat !== "" && this.props.tickformat !== null) {
+      // Initialize the sorted tick info to the original order (using slice to copy).
+      sortedtickformats = this.props.tickformat.slice();
+      sortedtickvalues = this.props.tickvalues.slice();
+    
+      // Create a list of objects containing the tick info.
+      var ticksinfo = [];
+      for (var i = 0; i < this.props.tickformat.length; i++) {
+        ticksinfo.push({
+          values: this.props.tickvalues[i],
+          formats: this.props.tickformat[i]
+        });
+      }
+      
+      // Sort the ticksinfo list by the tick values.
+      ticksinfo.sort(function(a, b) {
+        return a.values - b.values;
+      });
+      
+      // Pull out the sorted values from the sorted tickinfo objects.
+      for (var i = 0; i < this.props.tickformat.length; i++) {
+        sortedtickvalues[i] = ticksinfo[i].values;
+        sortedtickformats[i] = ticksinfo[i].formats;
+      }
+    }
+    else {
+      // Point the variables to the props passed in.
+      sortedtickformats = this.props.tickformat;
+      sortedtickvalues = this.props.tickvalues;
+    }
+    
+    var tickformat = mpld3_tickFormat(sortedtickformats, sortedtickvalues);
+    
     this.axis = d3.svg.axis()
         .scale(this.scale)
         .orient(this.props.position)
         .ticks(this.props.nticks)
-        .tickValues(this.props.tickvalues)
+        .tickValues(sortedtickvalues)
         .tickFormat(tickformat);
 
     this.filter_ticks(this.axis.tickValues, this.axis.scale().domain());
