@@ -25,9 +25,9 @@ function mpld3_Text(ax, props) {
 mpld3_Text.prototype.draw = function() {
     if (this.props.coordinates == "data") {
         if (this.coords.zoomable) {
-            this.obj = this.ax.paths.append("text");
-        } else {
             this.obj = this.ax.staticPaths.append("text");
+        } else {
+            this.obj = this.ax.paths.append("text");
         }
     } else {
         this.obj = this.ax.baseaxes.append("text");

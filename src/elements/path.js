@@ -51,7 +51,7 @@ mpld3_Path.prototype.draw = function() {
         }.bind(this));
 
     // TODO: (@vladh) Don't fully understand this.
-    if (this.pathcoords.zoomable) {
+    if (!this.pathcoords.zoomable) {
         this.path = this.ax.paths.append("svg:path")
     } else {
         this.path = this.ax.staticPaths.append("svg:path")

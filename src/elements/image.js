@@ -16,7 +16,7 @@ function mpld3_Image(ax, props) {
 }
 
 mpld3_Image.prototype.draw = function() {
-    this.image = this.ax.paths.append("svg:image")
+    this.image = this.ax.staticPaths.append("svg:image")
 
     this.image = this.image
         .attr('class', 'mpld3-image')

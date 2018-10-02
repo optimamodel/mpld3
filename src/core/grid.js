@@ -49,7 +49,7 @@ mpld3_Grid.prototype.draw = function() {
         .tickValues(this.props.tickvalues)
         .tickSize(this.tickSize, 0, 0)
         .tickFormat("");
-    this.elem = this.ax.axes.append("g")
+    this.elem = this.ax.staticPaths.append("g")
         .attr("class", this.cssclass)
         .attr("transform", this.transform)
         .call(this.grid);
@@ -74,6 +74,7 @@ mpld3_Grid.prototype.draw = function() {
 };
 
 mpld3_Grid.prototype.zoomed = function(transform) {
+    return;
     if (transform) {
         if (this.props.xy == 'x') {
             this.elem.call(this.grid.scale(transform.rescaleX(this.scale)));

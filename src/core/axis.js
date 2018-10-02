@@ -177,6 +177,7 @@ mpld3_Axis.prototype.draw = function() {
 };
 
 mpld3_Axis.prototype.zoomed = function(transform) {
+    return;
     // if we set tickValues for the axis, we are responsible for
     // updating them when they pan or zoom off of the chart
     // this.filter_ticks(this.axis.tickValues, this.axis.scale().domain());
