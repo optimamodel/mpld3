@@ -538,7 +538,7 @@ class InteractiveLegendPlugin(PluginBase):
         }
 
         // add a legend group to the canvas of the figure
-        var legend = this.fig.canvas.append("svg:g")
+        var legend = ax.paths.append("svg:g")
                                .attr("class", "legend");
 
         // add the rectangles
@@ -547,7 +547,7 @@ class InteractiveLegendPlugin(PluginBase):
                 .enter().append("rect")
                 .attr("height", 10)
                 .attr("width", 25)
-                .attr("x", ax.width + ax.position[0] + 25)
+                .attr("x", ax.width - 20)
                 .attr("y",function(d,i) {
                            return ax.position[1] + i * 25 + 10;})
                 .attr("stroke", get_color)

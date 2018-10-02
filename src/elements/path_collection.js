@@ -103,9 +103,9 @@ mpld3_PathCollection.prototype.allFinite = function(d) {
 mpld3_PathCollection.prototype.draw = function() {
     // TODO: (@vladh) Don't fully understand this.
     if (this.offsetcoords.zoomable || this.pathcoords.zoomable) {
-        this.group = this.ax.paths.append("svg:g");
-    } else {
         this.group = this.ax.staticPaths.append("svg:g");
+    } else {
+        this.group = this.ax.paths.append("svg:g");
     }
 
     this.pathsobj = this.group.selectAll("paths")
