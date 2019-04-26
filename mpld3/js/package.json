@@ -1,21 +1,20 @@
 {
   "name": "mpld3",
-  "version": "0.4.12",
+  "version": "0.4.13",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "http://github.com/sciris/mpld3"
   },
   "scripts": {
-    "build": "npm run buildv0.4.12 && npm run buildv0.4.1 && npm run buildlatest",
-    "buildlatest": "npm run buildv0.4.12",
-    "buildv0.4.12": "npx browserify mpld3.v0.4.12.min.js --standalone mpld3 -o dist/mpld3.v0.4.12.min.js",
+    "build": "npm run buildv0.4.13 && npm run buildv0.4.1 && npm run buildlatest",
+    "buildlatest": "npm run buildv0.4.13",
+    "buildv0.4.13": "npx browserify mpld3.v0.4.13.min.js --standalone mpld3 -o dist/mpld3.v0.4.13.min.js",
     "buildv0.4.1": "npx browserify mpld3.v0.4.1.min.js --standalone mpld3 -o dist/mpld3.v0.4.1.min.js"
   },
-  "main": "dist/mpld3.min.js",
+  "main": "dist/mpld3.v0.4.13.min.js",
   "files": [
-    "dist/mpld3.min.js",
-    "dist/mpld3.v0.4.12.min.js",
+    "dist/mpld3.v0.4.13.min.js",
     "dist/mpld3.v0.4.1.min.js"
   ],
   "bundleDependencies": false,
